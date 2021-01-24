@@ -1,5 +1,5 @@
 const User = require('../models/User');
-const { SafeCreateObj, SafeFindById } = require('../services/safeExec');
+const { SafeCreateObj, SafeFindById, SafeFind } = require('../services/safeExec');
 
 module.exports = {
     async store (req, res) {
@@ -82,4 +82,24 @@ module.exports = {
             return res.status(500).end();
         }
     },
+
+    async show (req, res) {
+        if (req.query.id) {
+            let user = await SafeFindById(User, req.query.id);
+            if (!user) {
+                return res.status(404).end();
+            }
+
+            return res.status(200).json(user);
+        }
+
+        else {
+            let users = await SafeFind(User, {});
+            if (!users) {
+                return res.status(404).end();
+            }
+
+            return res.status(200).json(users);
+        }
+    }
 }
