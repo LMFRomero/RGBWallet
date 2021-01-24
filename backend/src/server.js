@@ -4,7 +4,7 @@ const routes = require('./routes');
 const mongoose = require('mongoose');
 
 try {
-    mongoose.connect('mongodb://localhost:27017/myapp', {
+    mongoose.connect('mongodb://localhost:27017/rgbwallet', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
