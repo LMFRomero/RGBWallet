@@ -34,6 +34,10 @@ const UserSchema = new mongoose.Schema({
     balance: {
         type: Number,
         required: true
+    },
+    password: {
+        type: String,
+        required: false
     }
 });
 

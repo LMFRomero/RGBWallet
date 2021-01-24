@@ -5,9 +5,7 @@ module.exports = {
     async store (req, res) {
         let { name, username, hasSold, isInProject, weeksDone, isAdmin } = req.body;
 
-        if (!isAdmin) {
-            isAdmin = false;
-        }
+        isAdmin = false;
 
         let isDeleted = false;
         let balance = 0;
@@ -70,9 +68,6 @@ module.exports = {
         }
         if (weeksDone != null) {
             user.weeksDone = weeksDone;
-        }
-        if (isAdmin != null) {
-            user.isAdmin = isAdmin;
         }
 
         try {
