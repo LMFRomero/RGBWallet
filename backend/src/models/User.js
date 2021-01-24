@@ -26,6 +26,14 @@ const UserSchema = new mongoose.Schema({
     isAdmin: {
         type: Boolean,
         required: true
+    },
+    isDeleted: {
+        type: Boolean,
+        required: true,
+    },
+    balance: {
+        type: Number,
+        required: true
     }
 });
 

@@ -9,7 +9,10 @@ module.exports = {
             isAdmin = false;
         }
 
-        user = await SafeCreateObj(User, { name, username, hasSold, isInProject, weeksDone, isAdmin });
+        let isDeleted = false;
+        let balance = 0;
+
+        user = await SafeCreateObj(User, { name, username, hasSold, isInProject, weeksDone, isAdmin, isDeleted, balance });
         
         if (!user) {
             console.log("User not created");
