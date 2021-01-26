@@ -1,16 +1,19 @@
 const User = require('../models/User');
-const { SafeCreateObj, SafeFindById, SafeFind } = require('../services/safeExec');
+const bCrypt = require('../services/hash');
+const { SafeCreateObj, SafeFindById, SafeFind, SafeFindOne } = require('../services/safeExec');
+const SessionController = require('./SessionController');
 
 module.exports = {
     async store (req, res) {
-        let { name, username, hasSold, isInProject, weeksDone, isAdmin } = req.body;
+        let { name, username, hasSold, isInProject, weeksDone, isAdmin, password } = req.body;
 
         isAdmin = false;
 
         let isDeleted = false;
         let balance = 0;
+        password = bCrypt.createHash(password);
 
-        user = await SafeCreateObj(User, { name, username, hasSold, isInProject, weeksDone, isAdmin, isDeleted, balance });
+        user = await SafeCreateObj(User, { name, username, hasSold, isInProject, weeksDone, isAdmin, isDeleted, balance, password });
         
         if (!user) {
             console.log("User not created");
@@ -88,13 +91,43 @@ module.exports = {
             return res.status(200).json(user);
         }
 
-        else {
-            let users = await SafeFind(User, {});
-            if (!users) {
+        else if (req.query.username) {
+            let user = await SafeFindOne(User, username = req.query.username);
+            if (!user) {
                 return res.status(404).end();
             }
 
-            return res.status(200).json(users);
+            return res.status(200).json(user);
         }
+    },
+
+    async showAllUsers (req, res) {
+        let users = await SafeFind(User, {});
+        if (!users) {
+            return res.status(404).end();
+        }
+
+        return res.status(200).json(users);
+    },
+
+    async login (username, password) {
+        if (!username || !password) {
+            return null;
+        }
+
+        let user = await SafeFindOne(User, { "username": username });
+        if (!user)
+            return null;
+
+        // TODO: uncomment
+        // if (user.isAdmin == false)
+        //     return null;
+
+        let passwordHash = user.password;
+
+        if (bCrypt.validateHash(passwordHash, password))
+            return user;
+        else
+            return null;
     }
 }

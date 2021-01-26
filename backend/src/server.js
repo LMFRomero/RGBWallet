@@ -1,10 +1,18 @@
 const express = require('express');
 const routes = require('./routes');
 
+const passport = require('passport');
+const session = require('express-session');
+const redis = require('./services/redisStore');
+const cookieParser = require('cookie-parser');
+
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
+
 try {
-    mongoose.connect('mongodb://localhost:27017/rgbwallet', {
+    mongoose.connect(`mongodb://${process.env.MONGODB_HOSTNAME}:27017/rgbwallet`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
@@ -15,6 +23,20 @@ try {
 }
 
 app = express();
+
+app.use(cookieParser(`${process.env.REDIS_SECRET}`));
+
+app.use(session({
+    resave: false,
+    name: "RGBWalletSession",
+    saveUninitialized: true,
+    cookie: { secure: false, httpOnly: true, sameSite: 'none'/*, maxAge: 3600000*/ },
+    secret: `${process.env.REDIS_SECRET}`,
+    store: redis.sessionStore,
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.json());
 app.use(routes);

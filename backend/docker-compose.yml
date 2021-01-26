@@ -1,0 +1,22 @@
+version: "3"
+services:
+    rgb_redis:
+        image: redis
+        ports:
+            - 6379:6379
+        container_name: rgbCache
+
+    rgb_mongodb:
+        image: mongo
+        ports: 
+            - 27017:27017
+        container_name: rgbMongoDB
+
+    rgb_node:
+        build: .
+        ports:
+            - 3333:3333
+        container_name: rgbNode
+        depends_on:
+            - rgb_redis
+            - rgb_mongodb
