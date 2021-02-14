@@ -1,6 +1,6 @@
 const LocalStrategy = require('passport-local');
-const UserController = require('../controllers/UserController');
-const User = require('../models/User');
+const AdminController = require('../controllers/AdminController');
+const Admin = require('../models/Admin');
 
 module.exports = function (passport) {
     passport.serializeUser(function(user, done){
@@ -11,7 +11,7 @@ module.exports = function (passport) {
     });
  
     passport.deserializeUser(function(obj, done){
-        User.findById(obj.id, function(err,user){
+        Admin.findById(obj.id, function(err,user){
             done(err, user);    
         });
     });
@@ -21,7 +21,7 @@ module.exports = function (passport) {
         passwordField: 'password'
     },
         (username, password, done) => {
-            UserController.login(username, password).then((user => {
+            AdminController.login(username, password).then((user => {
 
                 //'done' is a function that returns to a function that uses LocalStrategy (e.g. passport.authenticate('local', callback) )
                 //'done' is a function of 3 parameters: (err, user, info)

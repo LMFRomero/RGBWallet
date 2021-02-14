@@ -23,23 +23,21 @@ module.exports = {
     },
 
     async addAmount (req, res) {
-        if (!req.params.id) {
-            return res.status(400).json({ "message": "Undefined id" });
+        let users = await SafeFind(User, {});
+        if (!users) {
+            return res.status(404).json({ "message": "Users not found" });
         }
 
-        let user = await SafeFindById(User, req.params.id);
-        if (!user) {
-            return res.status(404).json({ "message": "User not found" });
-        }
-
-        let amount = (40 + (5 * user.weeksDone)) * (1 + (user.hasSold && 0.2) + (user.isInProject && 0.1));
-        user.balance = user.balance + amount;
-
-        try {
-            await user.save();
-        } catch (error) {
-            console.log(error);
-            return res.status(500).json({ "message": "User could not be saved" });
+        for (let user in users) {
+            let amount = (40 + (5 * user.weeksDone)) * (1 + (user.hasSold && 0.2) + (user.isInProject && 0.1));
+            user.balance = user.balance + amount;
+            
+            try {
+                await user.save();
+            } catch (error) {
+                console.log(error);
+                return res.status(500).json({ "message": "User could not be saved" });
+            }
         }
     }
 }

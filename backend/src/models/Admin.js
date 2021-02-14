@@ -11,24 +11,9 @@ const UserSchema = new mongoose.Schema({
         unique: true,
         required: true
     },
-    hasSold: {
-        type: Boolean,
-        required: true
-    },
-    isInProject: {
-        type: Boolean,
-        required: true
-    },
-    weeksDone: {
-        type: Number,
-        required: true
-    },
-    isDeleted: {
-        type: Boolean,
-        required: true,
-    },
-    balance: {
-        type: Number,
+    password: {
+        type: String,
+        unique: true,
         required: true
     }
 });
