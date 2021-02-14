@@ -1,0 +1,55 @@
+.form-floating {
+    width: 900px;
+    height: 70px;
+
+    margin: 13px auto;
+}
+
+.form-floating > input {
+    width: 900px;
+    height: 70px!important;
+
+    margin: 0;
+
+    border: 2px outset black;
+    border-radius: 10px!important;
+}
+
+.form-floating > label {
+    font-size: 18px;
+}
+
+.form-check, .form-select {
+    width: 900px;
+    margin: 13px auto;
+}
+
+.form-check > label {
+    font-size: 18px;
+}
+
+.form-select > option {
+    font-size: 18px;
+}
+
+.form-select {
+    border: 2px outset black;
+}
+
+.el-gambiarra {
+    width: 900px;
+    margin: 13px auto;
+}
+
+.user-info-button {
+    background: #FFD101;
+    box-shadow: 0px 4px 20px rgba(0, 13, 13, 0.25);
+    border-radius: 10px;
+    border: 2px outset black;
+
+    transition: .2s;
+}
+
+.user-info-button:hover {
+    filter: brightness(90%);
+}
