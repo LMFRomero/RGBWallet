@@ -19,7 +19,7 @@
     font-size: 18px;
 }
 
-.form-check, .form-select {
+.form-check, .weeks-select {
     width: 900px;
     margin: 13px auto;
 }
@@ -30,10 +30,6 @@
 
 .form-select > option {
     font-size: 18px;
-}
-
-.form-select {
-    border: 2px outset black;
 }
 
 .el-gambiarra {
@@ -52,4 +48,10 @@
 
 .user-info-button:hover {
     filter: brightness(90%);
+}
+
+.weeks-select {
+    border: 2px outset black;
+    border-radius: 10px;
+    height: 70px;
 }

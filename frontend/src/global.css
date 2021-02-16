@@ -20,7 +20,7 @@ body {
     height: 100%;
     width: 100%;
     -webkit-font-smoothing: antialiased;
-    background: linear-gradient(#ECD876, #75BFC0);
+    background: linear-gradient(#ECD876, #75BFC0, #ECD876);
 }
 
 input, button, textarea {

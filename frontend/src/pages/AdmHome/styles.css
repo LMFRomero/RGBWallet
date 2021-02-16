@@ -1,0 +1,50 @@
+#create-user {
+    margin-bottom: 20px;
+}
+
+.main-buttons {
+    max-width: 1120px;
+    
+    margin: 20px auto;
+    padding: 0 40px;
+
+    border: 2px outset grey;
+    border-radius: 10px; 
+}
+
+.adm-main-button {
+    height: 90px;
+    width: 100%;
+
+    border: 2px outset black;
+    border-radius: 10px;
+
+    background-color: #FFD101;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 40px auto;
+
+    transition: .2s;
+}
+
+.adm-main-button:hover {
+    filter: brightness(90%);
+}
+
+#create-new-user-main-button:active {
+    background-attachment: red;
+    filter: brightness(50%);
+}
+
+.user-overview-list {
+    max-width: 1120px;
+    
+    padding: 0 40px;
+    margin: 40px auto;
+
+    border: 2px outset grey;
+    border-radius: 10px;
+}

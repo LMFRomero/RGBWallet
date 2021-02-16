@@ -1,0 +1,44 @@
+.overview-container {
+    margin: 30px auto;
+    padding: 15px 0;
+    
+    background-color: white;
+    
+    border-radius: 10px;
+}
+
+.overview-item {
+    height: 100%;
+    max-width: 400px;
+    margin: auto;
+    
+    display: flex;
+    align-items: center;
+
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+.overview-button {
+    width: 90%;
+    margin: auto;
+
+    background-color: #FFD101;
+
+    border: 2px outset black!important; 
+    border-radius: 10px;
+
+    transition: .2s;
+
+    font-size: 0.75rem;
+}
+
+.overview-button:hover {
+    filter: brightness(90%);
+}
+
+.centered-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
