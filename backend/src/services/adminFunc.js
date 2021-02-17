@@ -9,9 +9,9 @@ module.exports = {
         }
 
         let size = users.length;
-
         for (let i = 0; i < size; i++) {
-            users[i].balance = 0;
+            let user = users[i];
+            user.balance = 0;
 
             try {
                 await user.save();
@@ -23,15 +23,17 @@ module.exports = {
     },
 
     async addAmount (req, res) {
-        let users = await SafeFind(User, {});
+        let users = await SafeFind(User, { isDeleted: false });
         if (!users) {
             return res.status(404).json({ "message": "Users not found" });
         }
 
-        for (let user in users) {
+        let size = users.length;
+        for (let i = 0; i < size; i++) {
+            let user = users[i];
             let amount = (40 + (5 * user.weeksDone)) * (1 + (user.hasSold && 0.2) + (user.isInProject && 0.1));
             user.balance = user.balance + amount;
-            
+
             try {
                 await user.save();
             } catch (error) {

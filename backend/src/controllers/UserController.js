@@ -14,7 +14,7 @@ module.exports = {
             console.log("User not created");
             return res.status(500).end();
         }
-
+        
         return res.status(201).end();
     },
 
@@ -56,7 +56,7 @@ module.exports = {
             user.name = name;
         }
         if (username != null) {
-            user.username = name;
+            user.username = username;
         }
         if (hasSold != null) {
             user.hasSold = hasSold;
@@ -79,7 +79,7 @@ module.exports = {
     async show (req, res) {
         if (req.query.id) {
             let user = await SafeFindById(User, req.query.id);
-            if (!user) {
+            if (!user || user.isDeleted) {
                 return res.status(404).end();
             }
 
@@ -87,12 +87,16 @@ module.exports = {
         }
 
         else if (req.query.username) {
-            let user = await SafeFindOne(User, username = req.query.username);
-            if (!user) {
+            let user = await SafeFindOne(User, { username: req.query.username });
+            if (!user || user.isDeleted) {
                 return res.status(404).end();
             }
 
             return res.status(200).json(user);
+        }
+
+        else {
+            return res.status(400).end();
         }
     }
 }

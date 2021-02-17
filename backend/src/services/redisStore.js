@@ -19,5 +19,5 @@ sessionClient.on('error', (err) => {
 });
 
 module.exports = {
-    sessionStore: new redisStore({ client: sessionClient, ttl: 3600 })
+    sessionStore: new redisStore({ client: sessionClient, ttl: 3600000 })
 }

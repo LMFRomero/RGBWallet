@@ -1,22 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './styles.css';
 
 import Header from '../../components/Header/Header';
-import UserInfoForm from '../../components/UserInfoForm/UserInfoForm';
 
 export default function MainHome(){
     return (
         <div className="logon-container">
             <Header />
             
-            <userlog>
-
-                <button className="button">ENTRAR COMO ADMNISTRADOR</button>
+            <div className="userlog">
+                <Link to="/admLogin">
+                    <button className="button">ENTRAR COMO ADMNISTRADOR</button>
+                </Link>
                 
-                <button className="button">ENTRAR COMO USUÁRIO</button>
+                <Link to="/userLogin">
+                    <button className="button">ENTRAR COMO USUÁRIO</button>
+                </Link>
+            </div>
             
-            </userlog>
         </div>
     );
 }

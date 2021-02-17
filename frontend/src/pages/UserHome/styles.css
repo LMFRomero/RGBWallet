@@ -10,11 +10,11 @@
     justify-content: center;
 }
 
-.UserInterface section.home home {
+.UserInterface section.home .home-div {
     margin-bottom: 100px;
 }
 
-.UserInterface section.home home user{
+.UserInterface section.home .home-div .user{
     position: absolute;
     width: 1001px;
     height: 152px;
@@ -31,7 +31,7 @@
 }
 
 
-.UserInterface section.home home h3.saldo-container{
+.UserInterface section.home .home-div h3.saldo-container{
     /* RETANGULO */
     height: 170px;
     width: 1152px;
@@ -40,7 +40,7 @@
     color: #FFF;             
 }
 
-.UserInterface section.home home h3 saldo {
+.UserInterface section.home .home-div h3 .saldo {
         /* FONTE */
         font-family: Poppins;
         font-size: 72px;

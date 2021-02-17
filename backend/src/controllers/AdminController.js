@@ -64,7 +64,7 @@ module.exports = {
     },
 
     async showAllUsers (req, res) {
-        let users = await SafeFind(User, {});
+        let users = await SafeFind(User, { isDeleted: false });
         if (!users) {
             return res.status(404).end();
         }

@@ -8,6 +8,8 @@ const cookieParser = require('cookie-parser');
 
 const mongoose = require('mongoose');
 
+const cors = require('cors');
+
 require('dotenv').config();
 
 
@@ -30,9 +32,15 @@ app.use(session({
     resave: false,
     name: "RGBWalletSession",
     saveUninitialized: true,
-    cookie: { secure: false, httpOnly: true, sameSite: 'none'/*, maxAge: 3600000*/ },
+    cookie: { secure: false, httpOnly: false, sameSite: 'strict', maxAge: 3600000 },
     secret: `${process.env.REDIS_SECRET}`,
     store: redis.sessionStore,
+}));
+
+app.use(cors({
+    credentials: true,
+    origin: [`${process.env.REACT_HOSTNAME}:3000`, 'http://localhost:3000'],
+    exposedHeaders: ["set-cookie"]
 }));
 
 app.use(passport.initialize());
