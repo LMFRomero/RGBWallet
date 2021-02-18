@@ -62,12 +62,12 @@ export default function UserInfoForm(props) {
     return (
         <div className="container"> 
             <form onSubmit={handleSubmit}>
-                <div className="form-floating">
+                <div className="form-floating" required>
                     <input type="text" className="form-control" id="Name" placeholder="Nome Completo" value={name} onChange={e => setName(e.target.value)} />
                     <label for="floatingInput">Nome Completo</label>
                 </div>
 
-                <div className="form-floating">
+                <div className="form-floating" required>
                     <input type="text" className="form-control" id="Username" placeholder="Nome de Usuario" value={username} onChange={e => setUsername(e.target.value)} />
                     <label for="floatingInput">Nome de Usuário</label>
                 </div>

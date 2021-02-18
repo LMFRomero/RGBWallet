@@ -29,7 +29,7 @@ app = express();
 app.use(cookieParser(`${process.env.REDIS_SECRET}`));
 
 app.use(session({
-    resave: false,
+    resave: true,
     name: "RGBWalletSession",
     saveUninitialized: true,
     cookie: { secure: false, httpOnly: false, sameSite: 'strict', maxAge: 3600000 },

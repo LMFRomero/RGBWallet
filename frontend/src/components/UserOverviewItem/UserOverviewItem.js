@@ -19,7 +19,7 @@ export default function UserOverviewItem (props) {
 
     async function handleDelete (id) {
         try {
-            await api.delete(`/admin/user/${id}`, {}, { withCredentials: true });
+            await api.delete(`/admin/user/${id}`, { withCredentials: true });
             
             history.go(0);
         } catch (err) {

@@ -21,12 +21,10 @@ export default function UserHome() {
                     username
                 }
             });
-            
-            console.log(response.data.balance.$numberDecimal);
 
             setUsername(response.data.username);
             setName(response.data.name);
-            setBalance(parseFloat(response.data.balance.$numberDecimal).toFixed(2));
+            setBalance(parseFloat(response.data.balance).toFixed(2));
         } catch (err) {
             alert('Usuario nao encontrado');
             history.push('/');

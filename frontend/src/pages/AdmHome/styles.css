@@ -34,11 +34,6 @@
     filter: brightness(90%);
 }
 
-#create-new-user-main-button:active {
-    background-attachment: red;
-    filter: brightness(50%);
-}
-
 .user-overview-list {
     max-width: 1120px;
     
@@ -47,4 +42,21 @@
 
     border: 2px outset grey;
     border-radius: 10px;
+}
+
+.logout-div {
+    max-width: 1120px;
+}
+
+.logout-button {
+    background-color: #FFD101;
+
+    border: 2px outset black;
+    border-radius: 10px;
+
+    transition: .2s;
+}
+
+.logout-button:hover {
+    filter: brightness(90%);
 }

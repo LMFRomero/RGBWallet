@@ -13,21 +13,34 @@ import api from '../../services/api';
 
 export default function AdmHome() {
     const [items, setItems] = useState([]);
-    // const [trigger, setTrigger] = useState(false);
+    const [trigger, setTrigger] = useState(false);
 
     const history = useHistory();
 
     useEffect(async () => {
-        const response = await api.get('/admin/user', {}, { withCredentials: true });
+        try {
+            await api.post('/validate', {}, { withCredentials: true });
+        } catch (err) {
+            history.push('/');
+        }
+
+        try {
+            const response = await api.get('/admin/user', { withCredentials: true });
+
+            setItems(response.data);
+        } catch (err) {
+            console.log(err);
+        }
+
+        console.log("teste inside")
         
-        setItems(response.data);
-    }, []);
+    }, [trigger]);
 
     async function handleAddAmount () {
         try {
-            await api.post('/admin/addAmount', {}, { withCredentials: true });
+            setTrigger(!trigger);
 
-            history.go(0);
+            await api.post('/admin/addAmount', {}, { withCredentials: true });
         } catch (err) {
             alert('Erro ao adicionar saldo');
 
@@ -37,12 +50,22 @@ export default function AdmHome() {
 
     async function handleResetAmount () {
         try {
-            await api.post('/admin/resetBalance', {}, { withCredentials: true });
+            setTrigger(!trigger)
 
-            history.go(0);
+            await api.post('/admin/resetBalance', {}, { withCredentials: true });
         } catch (err) {
             alert('Erro ao zerar saldo');
 
+            console.log(err);
+        }
+    }
+
+    async function handleLogout () {
+        try {
+            await api.post('/logout', {}, { withCredentials: true });
+
+            history.push('/');
+        } catch (err) {
             console.log(err);
         }
     }
@@ -79,6 +102,10 @@ export default function AdmHome() {
                         <UserItem key={items[index]._id} info={items[index]}/>
                     )
                 ) }
+            </div>
+
+            <div className="container logout-div">
+                <button className="btn logout-button" onClick={handleLogout}>SAIR</button>
             </div>
         </div>
     );
